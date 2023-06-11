@@ -1,0 +1,31 @@
+Files to turn in : ft_strcmp.c
+Allowed functions : None
+
+• Reproduce the behavior of the function strcmp (man strcmp).
+• Here’s how it should be prototyped :
+int ft_strcmp(char *s1, char *s2);
+
+Certainly! Here's an implementation of the `ft_strcmp` function that reproduces the behavior of the `strcmp` function:
+
+```c
+int ft_strcmp(char *s1, char *s2)
+{
+    while (*s1 && (*s1 == *s2))
+    {
+        s1++;
+        s2++;
+    }
+
+    return (int)(*s1 - *s2);
+}
+```
+
+In this implementation, the `ft_strcmp` function takes two parameters: `s1` and `s2`, which are pointers to the null-terminated strings to be compared.
+
+The function uses a while loop to iterate through the strings character by character. It compares each character of `s1` with the corresponding character of `s2`. The loop continues as long as there are characters left in both strings and the characters are equal.
+
+If the characters are equal, the loop moves to the next characters by incrementing the pointers `s1` and `s2`. If the characters are not equal, the function returns the difference between the ASCII values of the characters.
+
+After the loop, if the strings are equal up to the null terminator, the function returns 0. If the strings differ, the function returns a positive value if the character in `s1` is greater, and a negative value if the character in `s2` is greater.
+
+Please note that this implementation assumes that the input strings are null-terminated.
