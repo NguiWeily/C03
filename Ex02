@@ -1,0 +1,44 @@
+Files to turn in : ft_strcat.c
+Allowed functions : None
+
+• Reproduce the behavior of the function strcat (man strcat).
+• Here’s how it should be prototyped :
+char *ft_strcat(char *dest, char *src);
+
+Certainly! Here's an implementation of the `ft_strcat` function that reproduces the behavior of the `strcat` function:
+
+```c
+char *ft_strcat(char *dest, char *src)
+{
+    char *ptr = dest;
+
+    // Move the pointer to the end of the destination string
+    while (*ptr)
+        ptr++;
+
+    // Copy the source string to the end of the destination string
+    while (*src)
+    {
+        *ptr = *src;
+        ptr++;
+        src++;
+    }
+
+    // Append the null terminator at the end
+    *ptr = '\0';
+
+    return dest;
+}
+```
+
+In this implementation, the `ft_strcat` function takes two parameters: `dest` and `src`, which are pointers to null-terminated strings.
+
+The function uses a while loop to move the pointer `ptr` to the end of the destination string. This is done by iterating until the null terminator (`'\0'`) is reached.
+
+Next, another while loop is used to copy the characters from the source string to the end of the destination string. The characters are copied one by one by dereferencing the `src` and `ptr` pointers and incrementing both pointers.
+
+After copying all the characters from the source string to the destination string, the function appends the null terminator (`'\0'`) at the end of the concatenated string.
+
+Finally, the function returns a pointer to the modified destination string.
+
+Please note that this implementation assumes that the destination string has enough space to accommodate the concatenated result, and that both the destination and source strings are null-terminated.
