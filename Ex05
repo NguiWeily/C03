@@ -1,0 +1,63 @@
+Files to turn in : ft_strlcat.c
+Allowed functions : None
+
+• Reproduce the behavior of the function strlcat (man strlcat).
+• Here’s how it should be prototyped :
+unsigned int ft_strlcat(char *dest, char *src, unsigned int size);
+
+Certainly! Here's an implementation of the `ft_strlcat` function that reproduces the behavior of the `strlcat` function:
+
+```c
+unsigned int ft_strlcat(char *dest, char *src, unsigned int size)
+{
+    unsigned int dest_len = 0;
+    unsigned int src_len = 0;
+    unsigned int total_len = 0;
+
+    // Calculate the length of the destination string
+    while (dest[dest_len])
+    {
+        if (dest_len >= size)
+            return size + src_len;
+
+        dest_len++;
+    }
+
+    // Calculate the length of the source string
+    while (src[src_len])
+        src_len++;
+
+    total_len = dest_len + src_len;
+
+    if (dest_len >= size)
+        return size + src_len;
+
+    // Copy at most (size - dest_len - 1) characters from the source string to the end of the destination string
+    while (*src && (dest_len < size - 1))
+    {
+        dest[dest_len] = *src;
+        dest_len++;
+        src++;
+    }
+
+    dest[dest_len] = '\0';
+
+    return total_len;
+}
+```
+
+In this implementation, the `ft_strlcat` function takes three parameters: `dest` and `src`, which are pointers to null-terminated strings, and `size`, which is the maximum size of the destination buffer.
+
+The function first calculates the length of the destination string by iterating through it until the null terminator (`'\0'`) is reached. If the length of the destination string exceeds or equals `size`, the function returns `size + src_len`, indicating that the size of the concatenated string would have been `size + src_len` if the buffer was large enough.
+
+Next, the function calculates the length of the source string by iterating through it until the null terminator is reached.
+
+The total length of the concatenated string is then calculated by adding the lengths of the destination and source strings.
+
+If the length of the destination string exceeds or equals `size`, the function returns `size + src_len` as the total length, since the destination buffer is already full.
+
+Otherwise, the function copies characters from the source string to the destination string, at most `(size - dest_len - 1)` characters, to ensure there is space for the null terminator. The function increments `dest_len` and `src` pointers during the copying process.
+
+Finally, the null terminator is added at the end of the concatenated string, and the total length is returned.
+
+Please note that this implementation assumes that the destination buffer has enough space to accommodate the concatenated result and that both the destination and source strings are null-terminated. Additionally, `size` specifies the maximum size of the destination buffer.
