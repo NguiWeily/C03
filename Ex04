@@ -1,45 +1,62 @@
+Chapter VII
+Exercise 04 : ft_strstr
+Exercise 04
+ft_strstr
+Turn-in directory : ex04/
 Files to turn in : ft_strstr.c
 Allowed functions : None
-
 • Reproduce the behavior of the function strstr (man strstr).
 • Here’s how it should be prototyped :
-char *ft_strstr(char *str, char *to_find);
+char
+*ft_strstr(char *str, char *to_find);
+and create main test code and comply norminette and don't use "for" and function as short as possible
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strstr.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: wngui <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/26 15:22:25 by wngui             #+#    #+#             */
+/*   Updated: 2023/06/26 17:36:17 by wngui            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+#include <stddef.h>
+#include <stdio.h>
 
-Certainly! Here's an implementation of the `ft_strncat` function that reproduces the behavior of the `strncat` function:
-
-```c
-char *ft_strncat(char *dest, char *src, unsigned int nb)
+char    *ft_strstr(char *str, char *to_find)
 {
-    char *ptr = dest;
+        char    *start;
+        char    *pattern;
 
-    // Move the pointer to the end of the destination string
-    while (*ptr)
-        ptr++;
-
-    // Copy at most nb characters from the source string to the end of the destination string
-    while (*src && nb > 0)
-    {
-        *ptr = *src;
-        ptr++;
-        src++;
-        nb--;
-    }
-
-    // Append the null terminator at the end
-    *ptr = '\0';
-
-    return dest;
+        if (*to_find == '\0')
+                return (str);
+        while (*str)
+        {
+                start = str;
+                pattern = to_find;
+                while (*str && *pattern && *str == *pattern)
+                {
+                        str++;
+                        pattern++;
+                }
+                if (*pattern == '\0')
+                        return (start);
+                str = start + 1;
+        }
+        return (NULL);
 }
-```
+/*
+int     main(void)
+{
+    char str[] = "Hello, world!";
+    char to_find[] = "world";
+    char *result = ft_strstr(str, to_find);
 
-In this implementation, the `ft_strncat` function takes three parameters: `dest` and `src`, which are pointers to null-terminated strings, and `nb`, which is the maximum number of characters to concatenate from the source string.
+    if (result)
+        printf("Substring found at: %s\n", result);
+    else
+        printf("Substring not found.\n");
 
-The function uses a while loop to move the pointer `ptr` to the end of the destination string. This is done by iterating until the null terminator (`'\0'`) is reached.
-
-Next, another while loop is used to copy the characters from the source string to the end of the destination string. The characters are copied one by one by dereferencing the `src` and `ptr` pointers and incrementing both pointers. The loop continues as long as there are characters left in the source string (`*src` is not null) and `nb` is greater than 0.
-
-After copying the specified number of characters from the source string to the destination string, or if the end of the source string is reached, the function appends the null terminator (`'\0'`) at the end of the concatenated string.
-
-Finally, the function returns a pointer to the modified destination string.
-
-Please note that this implementation assumes that the destination string has enough space to accommodate the concatenated result, and that both the destination and source strings are null-terminated. Additionally, `nb` specifies the maximum number of characters to concatenate and should not exceed the length of the source string.
+    return (0);
+}*/
