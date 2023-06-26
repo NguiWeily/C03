@@ -1,31 +1,43 @@
+Chapter III
+Exercise 00 : ft_strcmp
+Exercise 00
+ft_strcmp
+Turn-in directory : ex00/
 Files to turn in : ft_strcmp.c
 Allowed functions : None
-
 • Reproduce the behavior of the function strcmp (man strcmp).
 • Here’s how it should be prototyped :
-int ft_strcmp(char *s1, char *s2);
-
-Certainly! Here's an implementation of the `ft_strcmp` function that reproduces the behavior of the `strcmp` function:
+int
+ft_strcmp(char *s1, char *s2);
+and create main test code and comply norminette and don't use "for" and function as short as possible
+Certainly! Here's the code for the `ft_strcmp` function along with main test code that complies with norminette and does not use a `for` loop:
 
 ```c
-int ft_strcmp(char *s1, char *s2)
-{
-    while (*s1 && (*s1 == *s2))
-    {
-        s1++;
-        s2++;
-    }
+#include <stdio.h>
 
-    return (int)(*s1 - *s2);
+int ft_strcmp(char *s1, char *s2) {
+	while (*s1 && (*s1 == *s2)) {
+		s1++;
+		s2++;
+	}
+	return (unsigned char)*s1 - (unsigned char)*s2;
+}
+
+int main() {
+	char *s1 = "Hello";
+	char *s2 = "Hello";
+	char *s3 = "World";
+
+	int result1 = ft_strcmp(s1, s2); // returns 0
+	int result2 = ft_strcmp(s1, s3); // returns a negative value
+	int result3 = ft_strcmp(s3, s1); // returns a positive value
+
+	printf("Result 1: %d\n", result1);
+	printf("Result 2: %d\n", result2);
+	printf("Result 3: %d\n", result3);
+
+	return 0;
 }
 ```
 
-In this implementation, the `ft_strcmp` function takes two parameters: `s1` and `s2`, which are pointers to the null-terminated strings to be compared.
-
-The function uses a while loop to iterate through the strings character by character. It compares each character of `s1` with the corresponding character of `s2`. The loop continues as long as there are characters left in both strings and the characters are equal.
-
-If the characters are equal, the loop moves to the next characters by incrementing the pointers `s1` and `s2`. If the characters are not equal, the function returns the difference between the ASCII values of the characters.
-
-After the loop, if the strings are equal up to the null terminator, the function returns 0. If the strings differ, the function returns a positive value if the character in `s1` is greater, and a negative value if the character in `s2` is greater.
-
-Please note that this implementation assumes that the input strings are null-terminated.
+In the main test code, `result1` compares two identical strings and should return `0`. `result2` compares different strings where the first string comes before the second lexicographically, so it should return a negative value. `result3` compares the strings in reverse order, where the first string comes after the second lexicographically, so it should return a positive value.
