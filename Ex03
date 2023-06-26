@@ -1,45 +1,46 @@
+Chapter VI
+Exercise 03 : ft_strncat
+Exercise 03
+ft_strncat
+Turn-in directory : ex03/
 Files to turn in : ft_strncat.c
 Allowed functions : None
-
 • Reproduce the behavior of the function strncat (man strncat).
 • Here’s how it should be prototyped :
 char *ft_strncat(char *dest, char *src, unsigned int nb);
-
-Certainly! Here's an implementation of the `ft_strncat` function that reproduces the behavior of the `strncat` function:
-
-```c
-char *ft_strncat(char *dest, char *src, unsigned int nb)
+and create main test code and comply norminette and don't use "for" and function as short as possib
+char	*ft_strncat(char *dest, char *src, unsigned int nb)
 {
-    char *ptr = dest;
+	char *ptr;
 
-    // Move the pointer to the end of the destination string
-    while (*ptr)
-        ptr++;
+	ptr = dest;
+	while (*ptr)
+		ptr++;
+	while (*src && nb > 0)
+	{
+		*ptr = *src;
+		ptr++;
+		src++;
+		nb--;
+	}
+	*ptr = '\0';
 
-    // Copy at most nb characters from the source string to the end of the destination string
-    while (*src && nb > 0)
-    {
-        *ptr = *src;
-        ptr++;
-        src++;
-        nb--;
-    }
-
-    // Append the null terminator at the end
-    *ptr = '\0';
-
-    return dest;
+	return dest;
 }
-```
+#include <stdio.h>
 
-In this implementation, the `ft_strncat` function takes three parameters: `dest` and `src`, which are pointers to null-terminated strings, and `nb`, which is the maximum number of characters to concatenate from the source string.
+char	*ft_strncat(char *dest, char *src, unsigned int nb);
 
-The function uses a while loop to move the pointer `ptr` to the end of the destination string. This is done by iterating until the null terminator (`'\0'`) is reached.
+int	main(void)
+{
+	char dest[50] = "Hello, ";
+	char *src = "world!";
+	unsigned int nb = 5;
 
-Next, another while loop is used to copy the characters from the source string to the end of the destination string. The characters are copied one by one by dereferencing the `src` and `ptr` pointers and incrementing both pointers. The loop continues as long as there are characters left in the source string (`*src` is not null) and `nb` is greater than 0.
+	ft_strncat(dest, src, nb);
 
-After copying the specified number of characters from the source string to the destination string, or if the end of the source string is reached, the function appends the null terminator (`'\0'`) at the end of the concatenated string.
+	printf("%s\n", dest);
 
-Finally, the function returns a pointer to the modified destination string.
+	return 0;
+}
 
-Please note that this implementation assumes that the destination string has enough space to accommodate the concatenated result, and that both the destination and source strings are null-terminated. Additionally, `nb` specifies the maximum number of characters to concatenate and should not exceed the length of the source string.
