@@ -1,35 +1,60 @@
+Chapter IV
+Exercise 01 : ft_strncmp
+Exercise 01
+ft_strncmp
+Turn-in directory : ex01/
 Files to turn in : ft_strncmp.c
 Allowed functions : None
-
 • Reproduce the behavior of the function strncmp (man strncmp).
 • Here’s how it should be prototyped :
-int ft_strncmp(char *s1, char *s2, unsigned int n);
-
-Certainly! Here's an implementation of the `ft_strncmp` function that reproduces the behavior of the `strncmp` function:
+int
+ft_strncmp(char *s1, char *s2, unsigned int n);
+and create main test code and comply norminette and don't use "for" and function as short as possible
+Here's a possible implementation of the `ft_strncmp` function:
 
 ```c
 int ft_strncmp(char *s1, char *s2, unsigned int n)
 {
-    while (n > 0 && *s1 && (*s1 == *s2))
+    while (n > 0 && (*s1 == *s2))
     {
+        if (*s1 == '\0')
+            return 0; // Both strings are equal
+
         s1++;
         s2++;
         n--;
     }
 
     if (n == 0)
-        return 0;
+        return 0; // Reached the end of the comparison
 
-    return (int)(*s1 - *s2);
+    return (*s1 - *s2); // Difference in characters
 }
 ```
 
-In this implementation, the `ft_strncmp` function takes three parameters: `s1` and `s2`, which are pointers to the null-terminated strings to be compared, and `n`, which is the maximum number of characters to compare.
+In this implementation, the function compares the characters of `s1` and `s2` until one of the following conditions is met:
 
-The function uses a while loop to iterate through the strings character by character. It compares each character of `s1` with the corresponding character of `s2`. The loop continues as long as there are characters left in both strings, `n` is greater than 0, and the characters are equal.
+1. `n` becomes zero: This condition checks if we have compared `n` characters already. If `n` is zero, it means we have reached the end of the comparison and the strings are equal.
 
-If the characters are equal, the loop moves to the next characters by incrementing the pointers `s1` and `s2`, and decrementing `n`. If the characters are not equal, the function returns the difference between the ASCII values of the characters.
+2. Characters are not equal: If the characters at the current position `*s1` and `*s2` are not equal, we return the difference between them. This difference could be positive, negative, or zero, depending on the ASCII values of the characters.
 
-After the loop, if `n` is equal to 0, it means that the maximum number of characters to compare has been reached, and the function returns 0. If `n` is greater than 0 and the strings differ, the function returns a positive value if the character in `s1` is greater, and a negative value if the character in `s2` is greater.
+The main test code can be written as follows:
 
-Please note that this implementation assumes that the input strings are null-terminated and that `n` is not greater than the length of the shortest string.
+```c
+#include <stdio.h>
+
+int main()
+{
+    char str1[] = "Hello";
+    char str2[] = "Hell";
+    unsigned int n = 5;
+
+    int result = ft_strncmp(str1, str2, n);
+
+    printf("Comparison result: %d\n", result);
+
+    return 0;
+}
+```
+
+This code compares the first `n` characters of `str1` and `str2` using `ft_strncmp` and prints the result of the comparison.
