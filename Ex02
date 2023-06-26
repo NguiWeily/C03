@@ -1,44 +1,37 @@
+Chapter V
+Exercise 02 : ft_strcat
+Exercise 02
+ft_strcat
+Turn-in directory : ex02/
 Files to turn in : ft_strcat.c
 Allowed functions : None
-
 • Reproduce the behavior of the function strcat (man strcat).
 • Here’s how it should be prototyped :
 char *ft_strcat(char *dest, char *src);
+and create main test code and comply norminette and don't use "for" and function as short as possible
 
-Certainly! Here's an implementation of the `ft_strcat` function that reproduces the behavior of the `strcat` function:
+Certainly! Here's the implementation of the `ft_strcat` function:
 
 ```c
-char *ft_strcat(char *dest, char *src)
+char	*ft_strcat(char *dest, char *src)
 {
-    char *ptr = dest;
+	char *ptr;
 
-    // Move the pointer to the end of the destination string
-    while (*ptr)
-        ptr++;
-
-    // Copy the source string to the end of the destination string
-    while (*src)
-    {
-        *ptr = *src;
-        ptr++;
-        src++;
-    }
-
-    // Append the null terminator at the end
-    *ptr = '\0';
-
-    return dest;
+	ptr = dest;
+	while (*ptr)
+		ptr++;
+	while (*src)
+		*ptr++ = *src++;
+	*ptr = '\0';
+	return (dest);
 }
 ```
 
-In this implementation, the `ft_strcat` function takes two parameters: `dest` and `src`, which are pointers to null-terminated strings.
+Explanation:
+- The function takes two parameters, `dest` and `src`, which are pointers to the destination and source strings, respectively.
+- A pointer `ptr` is initialized to `dest` to keep track of the current position in the destination string.
+- The first `while` loop iterates through the destination string until the null terminator is encountered, moving the `ptr` pointer to the end of the string.
+- The second `while` loop iterates through the source string until the null terminator is encountered. At each iteration, the character from the source string is copied to the current position of `ptr` in the destination string, and both pointers are incremented.
+- Finally, the null terminator is added at the end of the concatenated string, and the modified `dest` string is returned.
 
-The function uses a while loop to move the pointer `ptr` to the end of the destination string. This is done by iterating until the null terminator (`'\0'`) is reached.
-
-Next, another while loop is used to copy the characters from the source string to the end of the destination string. The characters are copied one by one by dereferencing the `src` and `ptr` pointers and incrementing both pointers.
-
-After copying all the characters from the source string to the destination string, the function appends the null terminator (`'\0'`) at the end of the concatenated string.
-
-Finally, the function returns a pointer to the modified destination string.
-
-Please note that this implementation assumes that the destination string has enough space to accommodate the concatenated result, and that both the destination and source strings are null-terminated.
+Please note that this implementation assumes that the `dest` string has enough space to accommodate the concatenated result. It does not perform any bounds checking.
