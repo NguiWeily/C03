@@ -35,3 +35,30 @@ Explanation:
 - Finally, the null terminator is added at the end of the concatenated string, and the modified `dest` string is returned.
 
 Please note that this implementation assumes that the `dest` string has enough space to accommodate the concatenated result. It does not perform any bounds checking.
+Certainly! Here's the main test code for the `ft_strcat` function:
+
+```c
+#include <stdio.h>
+
+char	*ft_strcat(char *dest, char *src);
+
+int	main(void)
+{
+	char dest[50] = "Hello, ";
+	char *src = "world!";
+
+	ft_strcat(dest, src);
+
+	printf("%s\n", dest);
+
+	return 0;
+}
+```
+
+Explanation:
+- In the `main` function, a destination string `dest` is declared with enough space to accommodate the concatenated result.
+- A source string `src` is also declared.
+- The `ft_strcat` function is called with `dest` and `src` as arguments to concatenate the strings.
+- Finally, the concatenated string stored in `dest` is printed using `printf`.
+
+Please note that the norminette compliance may depend on the specific rules and configurations of the norminette being used. It's always a good idea to double-check the output and consult the norminette documentation for any specific requirements.
